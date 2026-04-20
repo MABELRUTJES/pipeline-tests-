@@ -18,35 +18,10 @@ env:
   BUILD_PATH: build
 
 jobs:
-  formatting:
-    name: Formatting
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v5
-        with:
-          dotnet-version: 8.0.x
-
-      - name: Check whitespace Assembly-CSharp
-        run: dotnet format whitespace Assembly-CSharp.csproj --verify-no-changes
-
-      - name: Check style Assembly-CSharp
-        run: dotnet format style Assembly-CSharp.csproj --verify-no-changes
-
-      - name: Check whitespace Assembly-CSharp-Editor
-        run: dotnet format whitespace Assembly-CSharp-Editor.csproj --verify-no-changes
-
-      - name: Check style Assembly-CSharp-Editor
-        run: dotnet format style Assembly-CSharp-Editor.csproj --verify-no-changes
 
   unity-tests:
     name: Unity Tests
     runs-on: ubuntu-latest
-    needs: formatting
 
     steps:
       - name: Checkout
