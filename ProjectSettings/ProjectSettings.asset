@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 22c9d015f205f44fa841303dfabc426f
+  productGUID: 4d1e589c33a8642be92df2b6ff9d2d7e
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -13,7 +13,7 @@ PlayerSettings:
   useOnDemandResources: 0
   accelerometerFrequency: 60
   companyName: DefaultCompany
-  productName: Demo
+  productName: development-assignment-1
   defaultCursor: {fileID: 0}
   cursorHotspot: {x: 0, y: 0}
   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b: 0.1254902, a: 1}
@@ -846,14 +846,14 @@ PlayerSettings:
   editorAssembliesCompatibilityLevel: 1
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Demo
+  metroPackageName: development-assignment-1
   metroPackageVersion: 
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 
   metroCertificateIssuer: 
   metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Demo
+  metroApplicationDescription: development-assignment-1
   wsaImages: {}
   metroTileShortName: 
   metroTileShowName: 0
@@ -924,10 +924,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 6f43dc29-5c63-4460-a415-292a050d6fe2
+  cloudProjectId: 7c6b73ae-d406-4e02-8fc2-2555f0c45afe
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Demo
+  projectName: development-assignment-1
   organizationId: mabelrutjes
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
