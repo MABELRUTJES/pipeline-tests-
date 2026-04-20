@@ -18,7 +18,7 @@ env:
   BUILD_PATH: build
 
 jobs:
-  formatting:
+   formatting:
     name: Formatting
     runs-on: ubuntu-latest
 
@@ -31,9 +31,17 @@ jobs:
         with:
           dotnet-version: 8.0.x
 
-      - name: Check formatting
-        run: dotnet format --verify-no-changes --folder .
+      - name: Check whitespace Assembly-CSharp
+        run: dotnet format whitespace Assembly-CSharp.csproj --verify-no-changes
 
+      - name: Check style Assembly-CSharp
+        run: dotnet format style Assembly-CSharp.csproj --verify-no-changes
+
+      - name: Check whitespace Assembly-CSharp-Editor
+        run: dotnet format whitespace Assembly-CSharp-Editor.csproj --verify-no-changes
+
+      - name: Check style Assembly-CSharp-Editor
+        run: dotnet format style Assembly-CSharp-Editor.csproj --verify-no-changes
   unity-tests:
     name: Unity Tests
     runs-on: ubuntu-latest
