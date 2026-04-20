@@ -31,7 +31,10 @@ jobs:
           dotnet-version: 8.0.x
 
       - name: Check formatting
-        run: dotnet format --verify-no-changes --folder .
+        run: dotnet format --verify-no-changes --folder 
+
+      - name: Run Roslyn analysis
+        run: dotnet build --no-restore .
 
   unity-tests:
     name: Unity Tests
