@@ -18,10 +18,32 @@ env:
   BUILD_PATH: build
 
 jobs:
+  code-style:
+    name: Code Style
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Check for tabs in C# files
+        run: |
+          if grep -RIn $'\t' Assets --include="*.cs"; then
+            echo "Tabs found in C# files. Use spaces according to .editorconfig."
+            exit 1
+          fi
+
+      - name: Check for trailing spaces in C# files
+        run: |
+          if grep -RIn ' $' Assets --include="*.cs"; then
+            echo "Trailing spaces found in C# files."
+            exit 1
+          fi
 
   unity-tests:
     name: Unity Tests
     runs-on: ubuntu-latest
+    needs: code-style
 
     steps:
       - name: Checkout
@@ -29,7 +51,7 @@ jobs:
         with:
           lfs: true
 
-      - name: Cache Unity Library
+      - name: Cache Unity Library for tests
         uses: actions/cache@v4
         with:
           path: ${{ env.PROJECT_PATH }}/Library
@@ -48,7 +70,6 @@ jobs:
           projectPath: ${{ env.PROJECT_PATH }}
           testMode: editmode
           artifactsPath: ${{ env.TEST_RESULTS_PATH }}
-          githubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Upload test results
         if: always()
@@ -68,7 +89,7 @@ jobs:
         with:
           lfs: true
 
-      - name: Cache Unity Library
+      - name: Cache Unity Library for build
         uses: actions/cache@v4
         with:
           path: ${{ env.PROJECT_PATH }}/Library
@@ -78,7 +99,7 @@ jobs:
             Library-build-${{ runner.os }}-
             Library-
 
-      - name: Build project
+      - name: Build Unity project
         uses: game-ci/unity-builder@v4
         env:
           UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
