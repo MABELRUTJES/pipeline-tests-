@@ -1,0 +1,71 @@
+
+root = true
+
+# Alle C# bestanden
+[*.cs]
+
+############################
+# Indentation
+############################
+indent_style = space
+indent_size = 4
+tab_width = 4
+
+############################
+# New lines & braces
+############################
+csharp_new_line_before_open_brace = all
+
+############################
+# Using statements
+############################
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = false
+
+############################
+# Naming conventions
+############################
+
+# Classes / methods / properties → PascalCase
+dotnet_naming_rule.types_should_be_pascal_case.severity = warning
+dotnet_naming_rule.types_should_be_pascal_case.symbols = types
+dotnet_naming_rule.types_should_be_pascal_case.style = pascal_case_style
+
+dotnet_naming_symbols.types.applicable_kinds = class, struct, interface, enum
+dotnet_naming_symbols.types.applicable_accessibilities = *
+
+dotnet_naming_style.pascal_case_style.capitalization = pascal_case
+
+# Private fields → camelCase
+dotnet_naming_rule.private_fields_should_be_camel_case.severity = warning
+dotnet_naming_rule.private_fields_should_be_camel_case.symbols = private_fields
+dotnet_naming_rule.private_fields_should_be_camel_case.style = camel_case_style
+
+dotnet_naming_symbols.private_fields.applicable_kinds = field
+dotnet_naming_symbols.private_fields.applicable_accessibilities = private
+
+dotnet_naming_style.camel_case_style.capitalization = camel_case
+
+############################
+# Roslyn analyzers (code quality)
+############################
+
+# unused variable
+dotnet_diagnostic.CS0168.severity = warning
+
+# assigned but never used
+dotnet_diagnostic.CS0219.severity = warning
+
+# possible null reference
+dotnet_diagnostic.CS8602.severity = warning
+
+# non-nullable field not initialized
+dotnet_diagnostic.CS8618.severity = warning
+
+############################
+# Formatting preferences
+############################
+
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_indent_labels = one_less_than_current
