@@ -12,7 +12,6 @@ concurrency:
 
 env:
   PROJECT_PATH: .
-  BUILD_TARGET: StandaloneWindows64
   BUILD_NAME: PipelineTestGame
   TEST_RESULTS_PATH: test-results
   BUILD_PATH: build
@@ -79,9 +78,15 @@ jobs:
           path: ${{ env.TEST_RESULTS_PATH }}
 
   unity-build:
-    name: Unity Build
+    name: Unity Build (${{ matrix.targetPlatform }})
     runs-on: ubuntu-latest
     needs: unity-tests
+    strategy:
+      fail-fast: false
+      matrix:
+        targetPlatform:
+          - StandaloneWindows64
+          - StandaloneOSX
 
     steps:
       - name: Checkout
@@ -93,9 +98,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ${{ env.PROJECT_PATH }}/Library
-          key: Library-build-${{ runner.os }}-${{ env.BUILD_TARGET }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          key: Library-build-${{ runner.os }}-${{ matrix.targetPlatform }}-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
           restore-keys: |
-            Library-build-${{ runner.os }}-${{ env.BUILD_TARGET }}-
+            Library-build-${{ runner.os }}-${{ matrix.targetPlatform }}-
             Library-build-${{ runner.os }}-
             Library-
 
@@ -107,12 +112,12 @@ jobs:
           UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           projectPath: ${{ env.PROJECT_PATH }}
-          targetPlatform: ${{ env.BUILD_TARGET }}
+          targetPlatform: ${{ matrix.targetPlatform }}
           buildsPath: ${{ env.BUILD_PATH }}
           buildName: ${{ env.BUILD_NAME }}
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ env.BUILD_NAME }}-${{ env.BUILD_TARGET }}
+          name: ${{ env.BUILD_NAME }}-${{ matrix.targetPlatform }}
           path: ${{ env.BUILD_PATH }}
